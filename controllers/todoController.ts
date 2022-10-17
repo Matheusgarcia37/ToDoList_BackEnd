@@ -110,5 +110,30 @@ class TodoController {
             return res.status(400).json({"error": "Erro ao atualizar todo!"});
         }
     }
+
+    public async check(req: Request, res: Response) {
+        try {
+             const { id } = req.body;
+ 
+             let todo = await prisma.toDo.findFirst({
+                 where: {
+                     id
+                 }
+             })
+ 
+             todo = await prisma.toDo.update({
+                 where: {
+                     id
+                 },
+                 data: {
+                     completed: !todo?.completed
+                 }
+             })
+ 
+             return res.json(todo)
+        } catch (error) {
+         console.log(error);
+        }
+     }
 }
 export default new TodoController();
