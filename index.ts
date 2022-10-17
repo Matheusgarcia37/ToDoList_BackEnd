@@ -1,7 +1,9 @@
 import express from 'express';
+import cors from 'cors';
 import UserRouter from './routes/user.routes';
 import TodoRouter from './routes/todo.routes';
 const app = express();
+app.use(cors());
 app.use(express.json());
 const port = 3000;
 
